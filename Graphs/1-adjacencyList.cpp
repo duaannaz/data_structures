@@ -53,7 +53,8 @@ public:
         }
     }
 
-    bool isCycle(){
+    // cycle detection using dfs
+    bool isCycleDFS(){
         vector<bool> visited(V,false);
         for(int i=0; i<V; i++){
             if(!visited[i]){
@@ -74,6 +75,38 @@ public:
         }
         return false;
     }
+
+    // cycle detection using bfs
+    bool isCycleBFS(){
+        vector<bool> visited(V,false);
+        for(int i=0; i<V; i++){
+            if(!visited[i]){
+                if(cycDetBfsUD(i,visited)) return true;
+            }
+        }
+        return false;
+    }
+    bool cycDetBfsUD(int u,vector<bool> &visited){ // O(V+E)
+        queue<pair<int,int>> q;
+        // vector<bool> visited(V,false);
+        q.push({u,-1});
+        visited[u]=true;
+        while(!q.empty()){
+            int u=q.front().first;
+            int p=q.front().second;
+            q.pop();
+            for(int v:l[u]){
+                if(!visited[v]){
+                    visited[v]=true;
+                    q.push({v,u});
+                }
+                else if(v!=p){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     void printAdjList(){
         for(int i=0; i<V; i++){
             cout<<i<<": ";
@@ -89,12 +122,12 @@ int main(){
     Graph g(5);
     g.addEdge(0,1);
     g.addEdge(1,2);
-    g.addEdge(2,3); //cycle
+    // g.addEdge(2,3); //cycle
     g.addEdge(4,2);
     g.addEdge(3,1);
     // g.printAdjList();
     // g.bfs();
     // g.DFS();
-    cout<<g.isCycle();
+    cout<<g.isCycleBFS();
     return 0;
 }
