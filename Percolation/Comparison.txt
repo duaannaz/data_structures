@@ -1,0 +1,4 @@
+Compare the standard Quick-Find UF with Weighted Quick-Union UF.
+What was your initial hypothesis and does the result support this?
+
+* You only need to submit the implementation using Weighted Quick-Union UF *
