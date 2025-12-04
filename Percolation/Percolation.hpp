@@ -1,8 +1,13 @@
-
+#include "unionFind.hpp"
 class Percolation {
+private:
+    int n;
+    QuickFind top,bottom;
 public:
     // creates n-by-n grid, with all sites initially blocked
-    Percolation(int n);
+    Percolation(int n){
+        
+    }
 
     // opens the site (row, col) if it is not open already
     void open(int row, int col);
